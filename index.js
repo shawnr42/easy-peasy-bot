@@ -86,7 +86,7 @@ controller.on('bot_channel_join', function (bot, message) {
 });
 
 controller.hears('hello', 'direct_message', function (bot, message) {
-    bot.reply(message, 'Hello!');
+    bot.reply(message, 'Do or do not, there is no try. :yoda:');
 });
 
 
