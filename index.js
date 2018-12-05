@@ -88,7 +88,7 @@ controller.on('bot_channel_join', function (bot, message) {
 var input = ['hello', 'hi', 'greetings'];
 var response = ['1', '2', '3'];
 controller.hears(input, 'direct_message', function (bot, message) {
-    bot.reply(message, input);
+    bot.reply(message, input[1]);
     bot.reply(message, 'Do or do not, there is no try. :yoda:');
 });
 
