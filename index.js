@@ -31,10 +31,12 @@ if (process.env.MONGOLAB_URI) {
     var BotkitStorage = require('botkit-storage-mongo');
     config = {
         storage: BotkitStorage({mongoUri: process.env.MONGOLAB_URI}),
+        //debug: true,
     };
 } else {
     config = {
         json_file_store: ((process.env.TOKEN)?'./db_slack_bot_ci/':'./db_slack_bot_a/'), //use a different name if an app or CI
+        //debug: true,
     };
 }
 
@@ -85,13 +87,25 @@ controller.on('bot_channel_join', function (bot, message) {
     bot.reply(message, "I'm here!")
 });
 
+
+/*
 var input = ['hello', 'hi', 'greetings'];
 var response = ['1', '2', '3'];
 controller.hears(input, 'direct_message', function (bot, message) {
-    bot.reply(message, input);
-    //bot.reply(message, 'Do or do not, there is no try. :yoda:');
-});
+    //bot.reply(message, input[1]);
+    bot.reply(message, 'Do or do not, there is no try. :yoda:');
+});*/
 
+controller.hears('spooky', 'direct_mention', function(bot, message) {
+    // default behavior, post as the bot user
+    bot.reply(message, raw_message);
+    bot.reply(message, 'Booo! This message is ephemeral and private to you')
+})
+
+controller.hears(['^spaghetti$'], function(bot, message) {
+    // attribute slack message to app, not bot user
+    bot.reply(message, {as_user: false, text: 'I may be a humble App, but I too love a good noodle'})
+})
 
 /**
  * AN example of what could be:
