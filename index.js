@@ -84,8 +84,11 @@ controller.on('rtm_close', function (bot) {
 controller.on('bot_channel_join', function (bot, message) {
     bot.reply(message, "I'm here!")
 });
-var input = ['hello', 'hi', 'greetings']
+
+var input = ['hello', 'hi', 'greetings'];
+var response = ['1', '2', '3'];
 controller.hears(input, 'direct_message', function (bot, message) {
+    bot.reply(message, input);
     bot.reply(message, 'Do or do not, there is no try. :yoda:');
 });
 
