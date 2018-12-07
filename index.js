@@ -96,10 +96,27 @@ controller.hears(input, 'direct_message', function (bot, message) {
     bot.reply(message, 'Do or do not, there is no try. :yoda:');
 });*/
 
-controller.hears('spooky', 'direct_mention', function(bot, message) {
+//build the list of team members. Eventually move this to a .json file
+var team = [{name:'Shawn',slackHandle:'@shawn.yoda'},
+    {name:'Al',slackHandle:'@met.al'},
+    {name:'Amanda',slackHandle:'@snidely.whiplash'}];
+    
+//now, lets get the names to listen for.
+var teamMembers = [];
+for (let i = 0; i < team.length; i++) {
+  teamMembers.push(team[i].name);
+}
+controller.hears('find me someone to meet with', 'direct_mention', function(bot, message) {
     // default behavior, post as the bot user
-    bot.reply(message, raw_message);
-    bot.reply(message, 'Booo! This message is ephemeral and private to you')
+    //bot.reply(message, 'someone in the team was mentioned');
+    var meetingList = 'I found these people are currently available online: ';
+    for (let i = 0; i < team.length; i++) {
+      meetingList = meetingList + team[i].name;
+      if(i != team.size) {
+        meetingList = meetingList + ", ";
+      }
+    }
+    bot.reply(message, meetingList);
 })
 
 controller.hears(['^spaghetti$'], function(bot, message) {
