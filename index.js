@@ -100,7 +100,7 @@ controller.hears(input, 'direct_message', function (bot, message) {
 var team = [{name:'Shawn',slackHandle:'@shawn.yoda'},
     {name:'Al',slackHandle:'@met.al'},
     {name:'Amanda',slackHandle:'@snidely.whiplash'}];
-    
+
 //now, lets get the names to listen for.
 var teamMembers = [];
 for (let i = 0; i < team.length; i++) {
@@ -117,6 +117,7 @@ controller.hears('find me someone to meet with', 'direct_mention', function(bot,
       }
     }
     bot.reply(message, meetingList);
+    bot.reply(message, 'Should I ping one of them for you?');
 })
 
 controller.hears(['^spaghetti$'], function(bot, message) {
